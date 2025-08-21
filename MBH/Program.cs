@@ -1,11 +1,23 @@
+using MBH.Data;
+using MBH.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<AppDbContext>(opt =>
+{
+    var cs = builder.Configuration.GetConnectionString("Default");
+    opt.UseSqlite(cs);
+});
+
+builder.Services.AddHostedService<TaskExecutionService>();
+
 
 var app = builder.Build();
 
