@@ -1,0 +1,6 @@
+@MBH_HostAddress = http://localhost:5279
+
+GET {{MBH_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
